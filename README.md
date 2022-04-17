@@ -66,7 +66,38 @@ VueRouter.prototype.push=function(location,resolve,reject){
 节流：快速的连续触发变为少量触发
 防抖：前面的事件都被取消，只有最后一次在规定时间后触发
 可用olodash包解决问题，使用那npm下载，不会看中文文档，在脚手架自动已经引入了
-_.throttle函数节流，_debounce函数防抖
+_.throttle函数节流，_.debounce函数防抖
 ```
+# 从三级目录向search跳转如何识别是否是点击a节点而不是其他节点，如何辨别点击的链接是哪一级
+```
+gei每一个a节点配置一个自定义属性，点击后获得target，通过dataset函数获得，
+如果存在就代表是a节点
+同时配置一个data-id1/2/3自定义属性，id是123判断路由
+*配置路由时
+let location={name:'search'}
+ let query={categoryName:categoryname}
+ location.query=query
+this.$router.push(location)是非常好的办法
+```
+# mockjs模拟数据
+```
+mock.js 生成随机数据，拦截ajax请求
+1.在src创建mock文件夹
+2.准备json数据,在mock建立相应的json文件，格式化一下，不要留有空格
+3.需要的图片放在public
+4.开始mock，在mockserve.js
+5.在入口文件引入
+
+```
+#  swiper 轮播图
+```
+安装Swiper插件5版本
+$nexttick函数，经常和插件一起使用，因为其他插件经常操作dom
+```
+
+# 将首页轮播图注册为全局组件
+
+
+# 
 
 

@@ -1,8 +1,8 @@
 <template>
    <div class="type-nav">
        
-            <div class="container">
-                <h2 class="all">全部商品分类</h2>
+            <div class="container" @mouseenter="enterShow" @mouseleave="enterNone">
+                <h2 class="all" >全部商品分类</h2>
                 <nav class="nav">
                     <a href="###">服装城</a>
                     <a href="###">美妆馆</a>
@@ -13,7 +13,9 @@
                     <a href="###">有趣</a>
                     <a href="###">秒杀</a>
                 </nav>
-                <div class="sort" >
+                <!-- 过渡动画 -->
+                <transition name="sort">
+                <div class="sort" v-show="shows">
                     <div class="all-sort-list2" @click.prevent="goSearch($event)">
                         <div class="item bo" v-for="(c1) in categoryList"  :key="c1.categoryId">
                             <h3>
@@ -37,6 +39,7 @@
                         
                     </div>
                 </div>
+                </transition>
             </div>
         </div>
     
@@ -45,6 +48,11 @@
 <script>
 import {mapState} from 'vuex'
 export default {
+    data() {
+        return {
+            shows:true
+        }
+    },
     computed:{
         // 右侧是一个函数，当使用计算属性，函数自动调用
         // state是大仓库内容
@@ -53,7 +61,10 @@ export default {
             })
     },
      mounted(){
-         this.$store.dispatch('categoryList')
+         if(this.$route.path!='/home'){
+         this.shows=false
+         }
+         
      },
      methods:{
          goSearch(e){
@@ -72,8 +83,21 @@ export default {
                            query.category3Id=category3id
                   }
                   location.query=query
+                  if(this.$route.params){
+                      location.params=this.$route.params
+                  }
                   this.$router.push(location)
              }
+         },
+         enterShow(){
+            if(this.$route.path!='/home'){
+             this.shows=true
+            }
+         },
+         enterNone(){
+            if(this.$route.path!='/home'){
+             this.shows=false
+            }
          }
      }
 }
@@ -200,6 +224,16 @@ export default {
                         background: #e1251b;
                     }
                 }
+            }
+            .sort-enter{
+                height: 0px;
+            }
+            .sort-enter-to{
+                height: 461px;
+                overflow: hidden;
+            }
+            .sort-enter-active{
+                transition: all .5s linear;
             }
         }
     }

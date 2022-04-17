@@ -20,6 +20,11 @@ export default {
   },
   computed:{
     
+  },
+  mounted(){
+    this.$store.dispatch('getFloorList')
+    this.$store.dispatch('categoryList')
+    this.$store.dispatch('getBannerList')
   }
 }
 </script>

@@ -50,7 +50,12 @@ export default {
     methods:{
         // 点击搜索的回调函数，向search路由跳转，并传参
         goSearch(){
-            this.$router.push({name:'search',params:{keyword:this.keyword||undefined},query:{keyword:this.keyword.toUpperCase()}})
+            let location={name:'search'}
+            location.params={keyword:this.keyword||undefined}
+            if(this.$route.query){
+                location.query=this.$route.query
+            }
+            this.$router.push(location)
         }
     }
 }
